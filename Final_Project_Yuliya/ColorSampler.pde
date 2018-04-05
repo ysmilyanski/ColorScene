@@ -3,6 +3,8 @@ class ColorSampler {
   PImage img;
   int imgHeight;
   int imgWidth;
+  int imgTopLeftX;
+  int imgTopLeftY;
   
   int pxls;
   IColor[] colorsByPixel;
@@ -10,14 +12,15 @@ class ColorSampler {
   String colorMode;
   
   ColorChannel[] colorTypes;
-  ColorChannel[] sortedColorTypes;
 
   ColorSampler(String imgName, String colorMode) {
     this.img = loadImage(imgName);
     this.imgHeight = img.height;
     this.imgWidth =img.width;
+    this.imgTopLeftX = 0;
+    this.imgTopLeftY = 0;
 
-    this.pxls = width * height;
+    this.pxls = width*height;
     this.colorsByPixel = new IColor[pxls];
     this.colorsByName = new String[pxls];
     
@@ -39,28 +42,21 @@ class ColorSampler {
         float g = green(pixels[i]);
         float b = blue(pixels[i]);
         colorsByPixel[i] = new ColorRGB(r, g, b);
-        //println(r + " " + g + " " + b);
       }
     }
     if (colorMode == "HSB") {
       for (int i = 0; i < pxls; i++) {
         float h = hue(pixels[i]);
         float s = saturation(pixels[i]);
-        float b = saturation(pixels[i]);
+        float b = brightness(pixels[i]);
         colorsByPixel[i] = new ColorHSB(h, s, b);
-        //println(h + " " + s + " " + b);
       }
     }
   }
   
   void populateColorsByName() {
-    if (colorMode == "RGB") {
-      // do nothing. not done yet
-    }
-    if (colorMode == "HSB") {
-      for (int i = 0; i < pxls; i++) {
+    for (int i = 0; i < pxls; i++) {
         colorsByName[i] = colorsByPixel[i].defineColor();
-      }
     }
   }
   
@@ -101,12 +97,6 @@ class ColorSampler {
     }
   }
   
-  void sortColorTypes() {
-    for (int i = 0; i < 9; i++) {
-      // not yet
-    }
-  }
-  
   void run() {
     populateColorsByPixel();
     populateColorsByName();
@@ -124,8 +114,6 @@ class ColorSampler {
     colorTypes[6] = new ColorChannel("blue");
     colorTypes[7] = new ColorChannel("purple");
     colorTypes[8] = new ColorChannel("pink");
-    
-    sortedColorTypes = new ColorChannel[9];
   }
 
   void changeColorMode(String cm) {
@@ -141,7 +129,7 @@ class ColorSampler {
   
   void showImage() {
     imageMode(CORNER);
-    image(this.img, 0, 0, 600, 600);
+    image(this.img, imgTopLeftX, imgTopLeftY, width, height);
     loadPixels();
   }
 }

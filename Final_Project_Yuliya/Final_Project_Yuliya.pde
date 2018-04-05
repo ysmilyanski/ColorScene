@@ -10,7 +10,7 @@ ColorSampler c;
 
 void setup() {
   size(600, 600);
-  c = new ColorSampler("images/lotsOColors.png", "HSB");
+  c = new ColorSampler("images/lotsOColors.png", "RGB");
   c.showImage();
   c.populateColorsByPixel();
   c.run();

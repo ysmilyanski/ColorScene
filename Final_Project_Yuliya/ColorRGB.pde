@@ -10,8 +10,7 @@ class ColorRGB implements IColor {
   }
   
   String defineColor() {
-    String c = "";
-    
+    String c = convertToHSB().defineColor();
     return c;
   }
   
