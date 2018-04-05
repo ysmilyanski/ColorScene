@@ -34,34 +34,6 @@ class ColorRGB implements IColor {
     return converted;
   }
   
-  // converts a color to CMYK
-  // code by https://processing.org/discourse/beta/num_1228243376.html
-  IColor convertToCMYK() {
-    float c = 1 - (r/255);
-    float m = 1 - (g/255);
-    float y = 1 - (b/255);
-    float b = 1;
-    
-    if (c < b) {
-      b = c;
-    }
-    if (m < b) {
-      b = m;
-    }
-    if (y < b) {
-      b = c;
-    }
-    
-    c = (c - b)/(1 - b) * 100;
-    m = (m - b)/(1 - b) * 100;
-    y = (y - b)/(1 - b) * 100;
-    b = b * 100;
-    
-    IColor converted = new ColorCMYK(c, m, y, b);
-    
-    return converted;
-  }
-  
   float getR() { return this.r; }
   float getG() { return this.g; }
   float getB() { return this.b; }

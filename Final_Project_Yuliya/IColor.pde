@@ -11,9 +11,6 @@ interface IColor {
   // converts a color to HSB
   IColor convertToHSB();
   
-  // converts a color to CMYK
-  IColor convertToCMYK();
-  
   // getters
   float getR();
   float getG();

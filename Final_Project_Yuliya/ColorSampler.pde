@@ -3,6 +3,8 @@ class ColorSampler {
   PImage img;
   int imgHeight;
   int imgWidth;
+  
+  int pxls;
   IColor[] colorsByPixel;
   String[] colorsByName;
   String colorMode;
@@ -15,8 +17,9 @@ class ColorSampler {
     this.imgHeight = img.height;
     this.imgWidth =img.width;
 
-    colorsByPixel = new IColor[width*height];
-    colorsByName = new String[width*height];
+    this.pxls = width * height;
+    this.colorsByPixel = new IColor[pxls];
+    this.colorsByName = new String[pxls];
     
     populateColorTypes();
 
@@ -31,7 +34,7 @@ class ColorSampler {
 
   void populateColorsByPixel() {
     if (colorMode == "RGB") {
-      for (int i = 0; i < width*height; i++) {
+      for (int i = 0; i < pxls; i++) {
         float r = red(pixels[i]);
         float g = green(pixels[i]);
         float b = blue(pixels[i]);
@@ -40,7 +43,7 @@ class ColorSampler {
       }
     }
     if (colorMode == "HSB") {
-      for (int i = 0; i < width*height; i++) {
+      for (int i = 0; i < pxls; i++) {
         float h = hue(pixels[i]);
         float s = saturation(pixels[i]);
         float b = saturation(pixels[i]);
@@ -55,14 +58,14 @@ class ColorSampler {
       // do nothing. not done yet
     }
     if (colorMode == "HSB") {
-      for (int i = 0; i < width*height; i++) {
+      for (int i = 0; i < pxls; i++) {
         colorsByName[i] = colorsByPixel[i].defineColor();
       }
     }
   }
   
   void findPopularColors() {
-    for (int i = 0; i < width*height; i++) {
+    for (int i = 0; i < pxls; i++) {
       String curColor = colorsByName[i];
       if (curColor == "red") {
         colorTypes[0].addOne();

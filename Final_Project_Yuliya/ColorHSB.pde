@@ -74,13 +74,6 @@ class ColorHSB implements IColor {
     return this;
   }
   
-  // converts a color to CMYK
-  IColor convertToCMYK() {
-    ColorRGB rgb = (ColorRGB) this.convertToRGB();
-    IColor converted = rgb.convertToCMYK();
-    return converted;
-  }
-  
   float getR() { throw new IllegalArgumentException("cannot retrieve r"); }
   float getG() { throw new IllegalArgumentException("cannot retrieve g"); }
   float getB() { return this.b; }

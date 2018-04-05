@@ -1,3 +1,5 @@
+// histogram that keeps track of the changes in 9 color channels over a period of time in a movie
+
 /**
 Yuliya Smilyanski
 Final Project
