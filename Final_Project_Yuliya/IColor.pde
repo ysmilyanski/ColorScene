@@ -11,7 +11,7 @@ interface IColor {
   // converts a color to HSB
   IColor convertToHSB();
   
-  // getters
+  // getters for the channels
   float getR();
   float getG();
   float getB();

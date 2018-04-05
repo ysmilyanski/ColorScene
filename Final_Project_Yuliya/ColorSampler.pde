@@ -1,18 +1,19 @@
 // takes an image and identifies all the colors of each pixel
 class ColorSampler {
-  PImage img;
-  int imgHeight;
-  int imgWidth;
-  int imgTopLeftX;
-  int imgTopLeftY;
+  PImage img;                  // image being sampled 
+  int imgHeight;               // height of the image
+  int imgWidth;                // width of the image
+  int imgTopLeftX;             // X position of the image on the screen
+  int imgTopLeftY;             // Y position of the image on the screen
   
-  int pxls;
-  IColor[] colorsByPixel;
-  String[] colorsByName;
-  String colorMode;
+  int pxls;                    // total number of pixels on the screen
+  IColor[] colorsByPixel;      // Array of IColors for each pixel on the screen
+  String[] colorsByName;       // Array of Strings defining the color of each pixel on the screen
+  String colorMode;            // the color mode of the program, etiehr "HSB" or "RGB"
   
-  ColorChannel[] colorTypes;
+  ColorChannel[] colorTypes;   // the possible color types
 
+  // constructs a color sampler for the given image in the given color mode
   ColorSampler(String imgName, String colorMode) {
     this.img = loadImage(imgName);
     this.imgHeight = img.height;
@@ -28,13 +29,14 @@ class ColorSampler {
 
     this.colorMode = colorMode;
     if (colorMode == "RGB") {
-      colorMode(RGB, 255);
+      colorMode(RGB);
     }
     if (colorMode == "HSB") {
-      colorMode(HSB, 360, 100, 100);
+      colorMode(HSB);
     }
   }
 
+  // populates the colorsByPixel array
   void populateColorsByPixel() {
     if (colorMode == "RGB") {
       for (int i = 0; i < pxls; i++) {
@@ -54,13 +56,15 @@ class ColorSampler {
     }
   }
   
+  // populates the colorsByName array
   void populateColorsByName() {
     for (int i = 0; i < pxls; i++) {
         colorsByName[i] = colorsByPixel[i].defineColor();
     }
   }
   
-  void findPopularColors() {
+  // calculates the percent of each color in the image
+  void calcColorPercents() {
     for (int i = 0; i < pxls; i++) {
       String curColor = colorsByName[i];
       if (curColor == "red") {
@@ -97,12 +101,14 @@ class ColorSampler {
     }
   }
   
+  // runs the appropriate methods in the right order to calculate the percent of each color in an image
   void run() {
     populateColorsByPixel();
     populateColorsByName();
-    findPopularColors();
+    calcColorPercents();
   }
   
+  // populates the color types for each color channel. arbitrarily identified
   void populateColorTypes() {
     colorTypes = new ColorChannel[9];
     colorTypes[0] = new ColorChannel("red");
@@ -116,6 +122,7 @@ class ColorSampler {
     colorTypes[8] = new ColorChannel("pink");
   }
 
+  // changes the color mode to the given color mode
   void changeColorMode(String cm) {
     if (cm == "RGB") {
       colorMode(RGB, 255);
@@ -127,6 +134,7 @@ class ColorSampler {
     }
   }
   
+  // shows the image on the screen
   void showImage() {
     imageMode(CORNER);
     image(this.img, imgTopLeftX, imgTopLeftY, width, height);

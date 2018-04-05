@@ -1,19 +1,22 @@
 class ColorRGB implements IColor {
-  float r;
-  float g;
-  float b;
+  float r;    // red
+  float g;    // green
+  float b;    // blue
   
+  // constructs a color of the RGB system
   ColorRGB(float r, float g, float b) {
     this.r = r;
     this.g = g;
     this.b = b;
   }
   
+  // defines the color by converting to HSB system
   String defineColor() {
     String c = convertToHSB().defineColor();
     return c;
   }
   
+  // gets the color system
   String getColorSystem() {
     return "RGB";
   }
@@ -33,6 +36,7 @@ class ColorRGB implements IColor {
     return converted;
   }
   
+  // getters for the channels
   float getR() { return this.r; }
   float getG() { return this.g; }
   float getB() { return this.b; }

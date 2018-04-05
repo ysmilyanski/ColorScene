@@ -1,24 +1,16 @@
 class ColorHSB implements IColor {
-  float h;
-  float s;
-  float b;
+  float h;    // hue
+  float s;    // saturation
+  float b;    // brightness
   
+  // constructs a color of the HSB system
   ColorHSB(float h, float s, float b) {
     this.h = h;
     this.s = s;
     this.b = b;
   }
   
-  // color: hue range
-  // red: 0 - 20, 340 - 360
-  // orange: 21 - 40
-  // yellow: 41 - 70
-  // lime green: 71 - 110
-  // blue green: 111 - 150
-  // light blue: 151 - 190
-  // blue: 191 - 247
-  // purple: 248 - 282
-  // pink: 283 - 339
+  // defines the color based on what the HSB values are
   String defineColor() {
     String c = "";
     
@@ -55,6 +47,7 @@ class ColorHSB implements IColor {
     return c;
   }
   
+  // gets the color system
   String getColorSystem() {
     return "HSB";
   }
@@ -74,6 +67,7 @@ class ColorHSB implements IColor {
     return this;
   }
   
+  // getters for the channels
   float getR() { throw new IllegalArgumentException("cannot retrieve r"); }
   float getG() { throw new IllegalArgumentException("cannot retrieve g"); }
   float getB() { return this.b; }
