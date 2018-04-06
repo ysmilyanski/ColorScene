@@ -1,3 +1,4 @@
+import processing.video.*;
 // histogram that keeps track of the changes in 9 color channels over a period of time in a movie
 
 /**
@@ -7,6 +8,7 @@ Section 01
 **/
 
 ColorSampler c;
+Movie myMovie;
 
 void setup() {
   size(600, 600);
