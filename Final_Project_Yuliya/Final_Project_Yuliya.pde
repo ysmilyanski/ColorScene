@@ -18,7 +18,7 @@ ColorHistograph deltaColors;
 void setup() {
   size(600, 600);
   myMovie = new Movie(this, "skate_00.mp4");
-  myMovie.frameRate(30);
+  myMovie.frameRate(10);
   myMovie.play();
 
   durationInSec = myMovie.duration();
@@ -39,4 +39,11 @@ void draw() {
     myMovie.read();
   }
   image(myMovie, 0, 0, 600, 600);
+  
+  if (frameCount % skipEveryBlankFrames == 0 && frameCount <= numberOfFrames) {
+    ColorSampler cs = new ColorSampler();
+    cs.run();
+    pickedFrames.add(cs);
+    println("frame " + frameCount + " grabbed");
+  }
 }

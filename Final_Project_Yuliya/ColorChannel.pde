@@ -58,7 +58,7 @@ class ColorChannel {
   // prints the percent of this color channel to the console
   void printChannel() {
     calcPercent();
-    if (percent != 0) {
+    if (round(percent) != 0) {
       println(name + " channel: " + amt + " pixels, " + round(percent) + "%");
     }
   }
