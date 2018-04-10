@@ -5,6 +5,8 @@ class ColorSampler {
   int imgWidth;                // width of the image
   int imgTopLeftX;             // X position of the image on the screen
   int imgTopLeftY;             // Y position of the image on the screen
+  int imgPxlsStart;
+  int imgPxlsEnd;
   
   int pxls;                    // total number of pixels on the screen
   IColor[] colorsByPixel;      // Array of IColors for each pixel on the screen
@@ -34,6 +36,21 @@ class ColorSampler {
     if (colorMode == "HSB") {
       colorMode(HSB);
     }
+  }
+  
+  ColorSampler() {
+    this.imgTopLeftX = 0;
+    this.imgTopLeftY = 0;
+    
+    this.pxls = width*height;
+    this.colorsByPixel = new IColor[pxls];
+    this.colorsByName = new String[pxls];
+    
+    populateColorTypes();
+    this.colorMode = "RGB";
+    colorMode(RGB);
+    
+    loadPixels();
   }
 
   // populates the colorsByPixel array
@@ -96,9 +113,9 @@ class ColorSampler {
       }
     }
     
-    for (int i = 0; i < 9; i++) {
-      colorTypes[i].printChannel();
-    }
+    //for (int i = 0; i < 9; i++) {
+    //  colorTypes[i].printChannel();
+    //}
   }
   
   // runs the appropriate methods in the right order to calculate the percent of each color in an image
@@ -137,7 +154,7 @@ class ColorSampler {
   // shows the image on the screen
   void showImage() {
     imageMode(CORNER);
-    image(this.img, imgTopLeftX, imgTopLeftY, width, height);
+    image(this.img, imgTopLeftX, imgTopLeftY, 600, 600);
     loadPixels();
   }
 }

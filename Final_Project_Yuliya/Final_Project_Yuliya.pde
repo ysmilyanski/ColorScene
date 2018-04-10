@@ -9,14 +9,17 @@ Section 01
 
 ColorSampler c;
 Movie myMovie;
+MovieColorSampler MCS;
 
 void setup() {
   size(600, 600);
-  c = new ColorSampler("images/lotsOColors.png", "RGB");
-  c.showImage();
-  c.populateColorsByPixel();
-  c.run();
+  //c = new ColorSampler("images/me.jpg", "RGB");
+  //c.showImage();
+  //c.run();
+  myMovie = new Movie(this, "skate_00.mp4");
+  MCS = new MovieColorSampler(myMovie, 10);
 }
 
 void draw() {
+  MCS.readMovie();
 }
