@@ -29,14 +29,11 @@ class MovieColorSampler {
 
   // read movie and populate the pickedFrames arrayList 
   void readMovie() {
-    myMovie.play();
-    myMovie.noLoop();
-    
     for (int i = 0; i < mFrames; i+=skipEveryBlankFrames) {
       if (myMovie.available()) {
         myMovie.read();
       }
-      image(myMovie, 0, 0);
+      image(myMovie, 0, 0, 600, 600);
       ColorSampler cs = new ColorSampler();
       cs.run();
       pickedFrames.add(cs);
