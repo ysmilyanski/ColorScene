@@ -75,4 +75,9 @@ class ColorChannel {
   void calcPercent() {
     this.percent = ((float) amt / (float) totalPixels) * 100;
   }
+  
+  float getPercent() {
+    calcPercent();
+    return this.percent;
+  }
 }

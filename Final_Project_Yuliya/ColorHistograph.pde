@@ -50,6 +50,6 @@ class ColorHistograph {
 
   void showHistograph() {
     // x axis = frames
-    // y axis = 
+    // y axis = percent of color
   }
 }
