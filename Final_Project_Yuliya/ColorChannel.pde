@@ -58,7 +58,7 @@ class ColorChannel {
   // prints the percent of this color channel to the console
   void printChannel() {
     calcPercent();
-    if (percent != 0) {
+    if (round(percent) != 0) {
       println(name + " channel: " + amt + " pixels, " + round(percent) + "%");
     }
   }
@@ -66,12 +66,12 @@ class ColorChannel {
   // for showing ColorHistograph
   // x = the frame of the movie
   // y = % of color on screen
-  void showChannelDot(int frame) {
-    fill(c);
-    ellipse(frame, percent, 5, 5);
+  void showChannelDot(int frame, int yCoef, int yBuff) {
+    fill(c, 200);
+    ellipse(frame, yBuff - percent*yCoef, 5, 5);
   }
   
-  // calculates the percent of pixels of this color channel on the screen
+ // yBufferlculates the percent of pixels of this color channel on the screen
   void calcPercent() {
     this.percent = ((float) amt / (float) totalPixels) * 100;
   }
