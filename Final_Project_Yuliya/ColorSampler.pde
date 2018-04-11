@@ -113,9 +113,9 @@ class ColorSampler {
       }
     }
     
-    for (int i = 0; i < 9; i++) {
-      colorTypes[i].printChannel();
-    }
+    //for (int i = 0; i < 9; i++) {
+    //  colorTypes[i].printChannel();
+    //}
   }
   
   // runs the appropriate methods in the right order to calculate the percent of each color in an image

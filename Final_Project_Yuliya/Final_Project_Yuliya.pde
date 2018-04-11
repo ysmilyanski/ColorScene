@@ -1,5 +1,4 @@
 import processing.video.*;
-// histogram that keeps track of the changes in 9 color channels over a period of time in a movie
 
 /**
  Yuliya Smilyanski
@@ -16,14 +15,14 @@ ArrayList<ColorSampler> pickedFrames;
 ColorHistograph deltaColors;
 
 void setup() {
-  size(600, 600);
-  myMovie = new Movie(this, "skate_00.mp4");
-  myMovie.frameRate(10);
+  size(960, 540);
+  myMovie = new Movie(this, "at_short.mp4");
+  myMovie.frameRate(30);
   myMovie.play();
 
   durationInSec = myMovie.duration();
   numberOfFrames = myMovie.frameRate * durationInSec;
-  numPickedFrames = 10;
+  numPickedFrames = 20;
   skipEveryBlankFrames = round(numberOfFrames / numPickedFrames);
   pickedFrames = new ArrayList<ColorSampler>();
   deltaColors = new ColorHistograph((int)numPickedFrames);
@@ -38,12 +37,24 @@ void draw() {
   if (myMovie.available()) {
     myMovie.read();
   }
-  image(myMovie, 0, 0, 600, 600);
+  image(myMovie, 0, 0, width, height);
   
   if (frameCount % skipEveryBlankFrames == 0 && frameCount <= numberOfFrames) {
     ColorSampler cs = new ColorSampler();
     cs.run();
     pickedFrames.add(cs);
     println("frame " + frameCount + " grabbed");
+  }
+  
+  else if (frameCount > numberOfFrames) {
+    // now create the histograph?
+    populateColorHistograph();
+    deltaColors.showHistograph();
+  }
+}
+
+void populateColorHistograph() {
+  for (int i = 0; i < pickedFrames.size(); i++) {
+    deltaColors.populateColorData(pickedFrames.get(i));
   }
 }
