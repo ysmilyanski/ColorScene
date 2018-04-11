@@ -48,8 +48,45 @@ class ColorHistograph {
     }
   }
 
+  // x axis = frames
+  // y axis = percent of color
   void showHistograph() {
-    // x axis = frames
-    // y axis = percent of color
+    noStroke();
+    fill(255);
+    rect(0, 0, width, height);
+    fill(0);
+    rect(10, 510, 940, 2);
+    
+    int xCoef = (width - 20)/totalFrames;
+    int yCoef = (height - 40)/100;
+    int yBuff = height - 40;
+    
+    for(int i = 0; i < red.size(); i++) {
+      red.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+    }
+    for(int i = 0; i < orange.size(); i++) {
+      orange.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+    }
+    for(int i = 0; i < yellow.size(); i++) {
+      yellow.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+    }
+    for(int i = 0; i < limeGreen.size(); i++) {
+      limeGreen.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+    }
+    for(int i = 0; i < blueGreen.size(); i++) {
+      blueGreen.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+    }
+    for(int i = 0; i < lightBlue.size(); i++) {
+      lightBlue.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+    }
+    for(int i = 0; i < blue.size(); i++) {
+      blue.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+    }
+    for(int i = 0; i < purple.size(); i++) {
+      purple.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+    }
+    for(int i = 0; i < pink.size(); i++) {
+      pink.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+    }
   }
 }
