@@ -21,7 +21,7 @@ boolean graphMode;
 
 void setup() {
   size(960, 540);
-  myMovie = new Movie(this, "at_10.mp4");
+  myMovie = new Movie(this, "at.mp4");
   myMovie.frameRate(30);
   myMovie.play();
   
@@ -44,7 +44,6 @@ void draw() {
     if (myMovie.available()) {
       myMovie.read();
     }
-    
     if (framesPassed <= numFrames && framesPassed % skipEveryBlankFrames == 0) {
       background(0);
       setFrame(framesPassed);
