@@ -84,7 +84,16 @@ class ColorSampler {
   void calcColorPercents() {
     for (int i = 0; i < pxls; i++) {
       String curColor = colorsByName[i];
-      if (curColor == "red") {
+      if (curColor == "white") {
+        colorTypes[9].addOne();
+      }
+      else if (curColor == "black") {
+        colorTypes[10].addOne();
+      }
+      else if (curColor == "gray") {
+        colorTypes[11].addOne();
+      }
+      else if (curColor == "red") {
         colorTypes[0].addOne();
       }
       else if (curColor == "orange") {
@@ -127,7 +136,10 @@ class ColorSampler {
   
   // populates the color types for each color channel. arbitrarily identified
   void populateColorTypes() {
-    colorTypes = new ColorChannel[9];
+    colorTypes = new ColorChannel[12];
+    colorTypes[9] = new ColorChannel("white");
+    colorTypes[10] = new ColorChannel("black");
+    colorTypes[11] = new ColorChannel("gray");
     colorTypes[0] = new ColorChannel("red");
     colorTypes[1] = new ColorChannel("orange");
     colorTypes[2] = new ColorChannel("yellow");

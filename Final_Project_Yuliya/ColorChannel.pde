@@ -13,7 +13,16 @@ class ColorChannel {
     this.amt = 0;
     this.totalPixels = width * height;
     
-    if (name == "red") {
+    if (name == "white") {
+      c = color(255);
+    }
+    else if (name == "black") {
+      c = color(0);
+    }
+    else if (name == "gray") {
+      c = color(97);
+    }
+    else if (name == "red") {
       c = color(255, 0, 0);
     }
     else if (name == "orange") {

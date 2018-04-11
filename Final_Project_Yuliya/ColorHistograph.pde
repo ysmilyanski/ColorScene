@@ -1,4 +1,7 @@
 class ColorHistograph {
+  ArrayList<ColorChannel> white;
+  ArrayList<ColorChannel> black;
+  ArrayList<ColorChannel> gray;
   ArrayList<ColorChannel> red;
   ArrayList<ColorChannel> orange;
   ArrayList<ColorChannel> yellow;
@@ -11,6 +14,9 @@ class ColorHistograph {
   int totalFrames;
 
   ColorHistograph(int frames) {
+    white = new ArrayList<ColorChannel>();
+    black = new ArrayList<ColorChannel>();
+    gray = new ArrayList<ColorChannel>();
     red = new ArrayList<ColorChannel>();
     orange = new ArrayList<ColorChannel>();
     yellow = new ArrayList<ColorChannel>();
@@ -26,7 +32,13 @@ class ColorHistograph {
   void populateColorData(ColorSampler cs) {
     for (int i = 0; i < cs.colorTypes.length; i++) {
       ColorChannel cc = cs.colorTypes[i];
-      if (cc.name == "red") {
+      if (cc.name == "white") {
+        white.add(cc);
+      } else if (cc.name == "black") {
+        black.add(cc);
+      } else if (cc.name == "gray") {
+        gray.add(cc);
+      } else if (cc.name == "red") {
         red.add(cc);
       } else if (cc.name == "orange") {
         orange.add(cc);
@@ -56,36 +68,45 @@ class ColorHistograph {
     rect(0, 0, width, height);
     fill(0);
     rect(10, 510, 940, 2);
-    
+
     int xCoef = (width - 20)/totalFrames;
     int yCoef = (height - 40)/100;
     int yBuff = height - 40;
-    
-    for(int i = 0; i < red.size(); i++) {
+
+    for (int i = 0; i < white.size(); i++) {
+      white.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+    }
+    for (int i = 0; i < black.size(); i++) {
+      black.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+    }
+    for (int i = 0; i < gray.size(); i++) {
+      gray.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+    }
+    for (int i = 0; i < red.size(); i++) {
       red.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
     }
-    for(int i = 0; i < orange.size(); i++) {
+    for (int i = 0; i < orange.size(); i++) {
       orange.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
     }
-    for(int i = 0; i < yellow.size(); i++) {
+    for (int i = 0; i < yellow.size(); i++) {
       yellow.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
     }
-    for(int i = 0; i < limeGreen.size(); i++) {
+    for (int i = 0; i < limeGreen.size(); i++) {
       limeGreen.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
     }
-    for(int i = 0; i < blueGreen.size(); i++) {
+    for (int i = 0; i < blueGreen.size(); i++) {
       blueGreen.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
     }
-    for(int i = 0; i < lightBlue.size(); i++) {
+    for (int i = 0; i < lightBlue.size(); i++) {
       lightBlue.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
     }
-    for(int i = 0; i < blue.size(); i++) {
+    for (int i = 0; i < blue.size(); i++) {
       blue.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
     }
-    for(int i = 0; i < purple.size(); i++) {
+    for (int i = 0; i < purple.size(); i++) {
       purple.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
     }
-    for(int i = 0; i < pink.size(); i++) {
+    for (int i = 0; i < pink.size(); i++) {
       pink.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
     }
   }
