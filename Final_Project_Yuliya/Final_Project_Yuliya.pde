@@ -7,59 +7,83 @@ import processing.video.*;
  **/
 
 Movie myMovie;
-float durationInSec;
-float numberOfFrames;
-float numPickedFrames;
-float skipEveryBlankFrames;
+int numPickedFrames;
 ArrayList<ColorSampler> pickedFrames;
 ColorHistograph deltaColors;
 
 int newFrame = 0;
+int framesPassed = 0;
+
+boolean movieMode;
+boolean readMode;
+boolean graphMode;
 
 void setup() {
   size(960, 540);
   myMovie = new Movie(this, "at_10.mp4");
   myMovie.frameRate(30);
   myMovie.play();
-
-  durationInSec = myMovie.duration();
-  numberOfFrames = myMovie.frameRate * durationInSec;
-  numPickedFrames = 20;
-  skipEveryBlankFrames = round(numberOfFrames / numPickedFrames);
+  
+  numPickedFrames = 10;
   pickedFrames = new ArrayList<ColorSampler>();
-  deltaColors = new ColorHistograph((int)numPickedFrames);
+  deltaColors = new ColorHistograph(numPickedFrames);
+
+  movieMode = false;
+  readMode = true;
+  graphMode = false;
 
   myMovie.jump(0);
   myMovie.pause();
-
-  println("created MCS with " + durationInSec + " secs of movie");
-  println("fps: " + frameRate);
-  println("frames in movie: " + numberOfFrames);
-  println("# picked frames: " + numPickedFrames);
-  println("skip every __ frames: " + skipEveryBlankFrames);
 }
 
 void draw() {
-  if (myMovie.available()) {
-    myMovie.read();
+  if (movieMode) {
+    if (myMovie.available()) {
+      myMovie.read();
+    }
+    background(0);
+    image(myMovie, 0, 0, width, height);
+    text(getFrame() + " / " + (getLength() - 1), 10, 30);
   }
-  background(0);
-  image(myMovie, 0, 0, width, height);
-  text(getFrame() + " / " + (getLength() - 1), 10, 30);
+  else if (readMode) {
+    if (myMovie.available()) {
+      myMovie.read();
+    }
+    
+    int numFrames = getLength() - 1;
+    int skipEveryBlankFrames = numFrames / numPickedFrames;
+    
+    if (framesPassed <= numFrames && framesPassed % skipEveryBlankFrames == 0) {
+      background(0);
+      setFrame(framesPassed);
+      image(myMovie, 0, 0, width, height);
+      readMovie();
+      println("grabbed frame " + framesPassed);
+    }
+    
+    framesPassed++;
+  }
+  else if (graphMode) {
+    fill(255);
+    rect(0, 0, width, height);
+    deltaColors.showHistograph();
+  }
 }
 
 void keyPressed() {
   if (key == CODED) {
-    if (keyCode == LEFT) {
-      if (0 < newFrame) newFrame--;
-    } else if (keyCode == RIGHT) {
-      if (newFrame < getLength() - 1) newFrame++;
-    } else if (keyCode == UP) {
-      readMovie();
+    if (keyCode == LEFT && !readMode) {
+      if (0 < newFrame) newFrame-= 5;
+    } else if (keyCode == RIGHT && !readMode) {
+      if (newFrame < getLength() - 1) newFrame+= 5;
+    } else if (keyCode == UP && !readMode) {
+      //readMovie();
     } else if (keyCode == DOWN) {
-      fill(255);
-      rect(0, 0, width, height);
-      deltaColors.showHistograph();
+      if (movieMode && readMode) {
+        graphMode = true;
+        movieMode = false;
+        readMode = false;
+      }
     }
   } 
   setFrame(newFrame);
@@ -70,7 +94,7 @@ void readMovie() {
   cs.run();
   pickedFrames.add(cs);
   deltaColors.populateColorData(cs);
-  println("frame grabbed");
+  println("red: " + deltaColors.red.size());
 }
 
 int getFrame() {
@@ -93,4 +117,13 @@ void setFrame(int n) {
 
 int getLength() {
   return int(myMovie.duration() * myMovie.frameRate);
+}
+
+void grabMovieFrames() {
+  int numFrames = getLength() - 1;
+  int skipEveryBlankFrames = numFrames / numPickedFrames;
+  for (int i = 0; i < numPickedFrames; i++) {
+    setFrame(i*skipEveryBlankFrames);
+    readMovie();
+  }
 }
