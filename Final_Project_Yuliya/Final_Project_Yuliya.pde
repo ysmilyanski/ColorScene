@@ -21,7 +21,7 @@ boolean graphMode;                        // mode for graphing the movie colors
 
 void setup() {
   size(960, 540);
-  myMovie = new Movie(this, "at.mp4");      // choose the movie
+  myMovie = new Movie(this, "at_short.mp4");      // choose the movie
   myMovie.frameRate(30);
   myMovie.play();
   

@@ -64,50 +64,46 @@ class ColorHistograph {
   // y axis = percent of color
   void showHistograph() {
     noStroke();
-    fill(255);
-    rect(0, 0, width, height);
-    fill(0);
-    rect(10, 510, 940, 2);
-
-    int xCoef = (width - 20)/totalFrames;
-    int yCoef = (height - 40)/100;
-    int yBuff = height - 40;
+    stroke(0);
+    line(120, 420, 840, 420);
+    line(120, 120, 120, 420);
+    noStroke();
 
     for (int i = 0; i < white.size(); i++) {
-      white.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+      white.get(i).showChannelDot(i, white.get(i).getPercent());
     }
     for (int i = 0; i < black.size(); i++) {
-      black.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+      black.get(i).showChannelDot(i, black.get(i).getPercent());
     }
     for (int i = 0; i < gray.size(); i++) {
-      gray.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+      gray.get(i).showChannelDot(i, gray.get(i).getPercent());
     }
     for (int i = 0; i < red.size(); i++) {
-      red.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+      red.get(i).showChannelDot(i, red.get(i).getPercent());
     }
     for (int i = 0; i < orange.size(); i++) {
-      orange.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+      orange.get(i).showChannelDot(i, orange.get(i).getPercent());
     }
     for (int i = 0; i < yellow.size(); i++) {
-      yellow.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+      yellow.get(i).showChannelDot(i, yellow.get(i).getPercent());
     }
     for (int i = 0; i < limeGreen.size(); i++) {
-      limeGreen.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+      limeGreen.get(i).showChannelDot(i, limeGreen.get(i).getPercent());
     }
     for (int i = 0; i < blueGreen.size(); i++) {
-      blueGreen.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+      blueGreen.get(i).showChannelDot(i, blueGreen.get(i).getPercent());
     }
     for (int i = 0; i < lightBlue.size(); i++) {
-      lightBlue.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+      lightBlue.get(i).showChannelDot(i, lightBlue.get(i).getPercent());
     }
     for (int i = 0; i < blue.size(); i++) {
-      blue.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+      blue.get(i).showChannelDot(i, blue.get(i).getPercent());
     }
     for (int i = 0; i < purple.size(); i++) {
-      purple.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+      purple.get(i).showChannelDot(i, purple.get(i).getPercent());
     }
     for (int i = 0; i < pink.size(); i++) {
-      pink.get(i).showChannelDot(i*xCoef + 10, yCoef, yBuff);
+      pink.get(i).showChannelDot(i, pink.get(i).getPercent());
     }
   }
 }
