@@ -48,7 +48,7 @@ void setup() {
 
 void draw() {
   if (record) {
-    beginRecord(PDF, "graph-####.pdf");
+    beginRecord(PDF, movieTitle + "_colorHistograph.pdf");
   }
   
   if (readMode) {
