@@ -7,6 +7,7 @@ import processing.pdf.*;
  Section 01
 **/
 
+String movieTitle;
 Movie myMovie;                            // the movie to be read  
 int numPickedFrames;                      // number of frames to be read
 ArrayList<ColorSampler> pickedFrames;     // array list that has a color sampler for each frame to be read
@@ -20,23 +21,26 @@ int skipEveryBlankFrames;                 // how many frames to skip between eac
 boolean readMode;                         // mode for reading the movie colors
 boolean graphMode;                        // mode for graphing the movie colors
 boolean record;
+boolean showFrameMode;
 
 void setup() {
   size(960, 540);
-  myMovie = new Movie(this, "tgbh.mp4");      // choose the movie
+  movieTitle = "at.mp4";
+  myMovie = new Movie(this, movieTitle);      // choose the movie
   myMovie.frameRate(30);
   myMovie.play();
   
   numPickedFrames = 20;
   pickedFrames = new ArrayList<ColorSampler>();
-  deltaColors = new ColorHistograph(numPickedFrames);
+  deltaColors = new ColorHistograph(movieTitle);
 
   numFrames = getLength() - 1;
-  skipEveryBlankFrames = numFrames / numPickedFrames;
+  skipEveryBlankFrames = numFrames / (numPickedFrames - 1);
 
   readMode = true;
   graphMode = false;
   record = false;
+  showFrameMode = false;
 
   myMovie.jump(0);
   myMovie.pause();
@@ -56,7 +60,6 @@ void draw() {
       setFrame(framesPassed);
       image(myMovie, 0, 0, width, height);
       readMovie();
-      println("grabbed frame " + framesPassed);
     }
     else if (framesPassed > numFrames) {
       readMode = false;
@@ -70,7 +73,20 @@ void draw() {
     myMovie.stop();
     fill(30);
     rect(0, 0, width, height);
-    deltaColors.showHistograph(numPickedFrames);
+    deltaColors.showHistograph(numPickedFrames, newFrame, skipEveryBlankFrames);
+  }
+  
+  else if (showFrameMode) {
+    myMovie.play();
+    myMovie.pause();
+    setFrame(newFrame);
+    if (myMovie.available()) {
+      myMovie.read();
+    }
+    noStroke();
+    fill(255);
+    rect(width/4 - 10, height/4 - 10, 500, 290);
+    image(myMovie, width/4, height/4, width/2, height/2);
   }
   
   if (record) {
@@ -82,15 +98,30 @@ void draw() {
 void keyPressed() {
   if (key == CODED) {
     if (keyCode == DOWN) {
-      if (readMode) {
-        graphMode = true;
-        readMode = false;
+      if (graphMode) {
+        if (newFrame > 0) newFrame-=skipEveryBlankFrames;
+      }
+    }
+    else if (keyCode == UP) {
+      if (graphMode) {
+        if (newFrame == 0) newFrame+=skipEveryBlankFrames;
+        else if (newFrame < getLength() - 1) newFrame+=skipEveryBlankFrames;
       }
     }
   }
   if (key == 'p') {
     record = true;
   }
+  if (key == 'v') {
+    showFrameMode = true;
+    graphMode = false;
+  }
+  if (key == 'g') {
+    showFrameMode = false;
+    graphMode = true;
+  }
+  
+  println(newFrame);
   setFrame(newFrame);
 }
 
