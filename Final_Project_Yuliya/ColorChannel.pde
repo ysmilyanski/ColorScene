@@ -76,6 +76,7 @@ class ColorChannel {
   // x = the frame of the movie
   // y = % of color on screen
   void showChannelDot(int frame, int yCoef, int yBuff) {
+    ellipseMode(CENTER);
     fill(c, 200);
     ellipse(frame, yBuff - percent*yCoef, 5, 5);
   }
