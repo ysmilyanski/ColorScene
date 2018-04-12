@@ -76,9 +76,12 @@ class ColorChannel {
   // x = the frame of the movie
   // y = % of color on screen
   void showChannelDot(int x, int y) {
-    ellipseMode(CENTER);
-    fill(c, 200);
-    //ellipse(x, y, 5, 5);
+    calcPercent();
+    if (percent >= 1) {
+      ellipseMode(CENTER);
+      fill(c, 150);
+      ellipse(x, y, 5, 5);
+    }
   }
   
  // yBufferlculates the percent of pixels of this color channel on the screen
@@ -89,5 +92,9 @@ class ColorChannel {
   int getPercent() {
     calcPercent();
     return (int) round(this.percent);
+  }
+  
+  color getColor() {
+    return this.c;
   }
 }

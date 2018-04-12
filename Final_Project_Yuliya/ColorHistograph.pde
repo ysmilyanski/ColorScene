@@ -62,48 +62,185 @@ class ColorHistograph {
 
   // x axis = frames
   // y axis = percent of color
-  void showHistograph() {
+  void showHistograph(int pickedFrames) {
     noStroke();
-    stroke(0);
-    line(120, 420, 840, 420);
-    line(120, 120, 120, 420);
+    stroke(255);
+    strokeWeight(3);
+    line(115, 425, 850, 425);
+    line(115, 120, 115, 425);
     noStroke();
+    
+    int xCoef = int(720 / pickedFrames);
+    int xBuff = 120;
+    int yBuff = 420;
 
     for (int i = 0; i < white.size(); i++) {
-      white.get(i).showChannelDot(i, white.get(i).getPercent());
+      int p = white.get(i).getPercent();
+      color c = white.get(i).getColor();
+      
+      white.get(i).showChannelDot(i*xCoef + xBuff, yBuff - p*3);
+      
+      if (i != 0) {
+        int pOld = white.get(i-1).getPercent();
+        stroke(c, 150);
+        strokeWeight(5);
+        line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
+        noStroke();
+      }
     }
     for (int i = 0; i < black.size(); i++) {
-      black.get(i).showChannelDot(i, black.get(i).getPercent());
+      int p = black.get(i).getPercent();
+      color c = black.get(i).getColor();
+      
+      black.get(i).showChannelDot(i*xCoef + xBuff, yBuff - p*3);
+      
+      if (i != 0) {
+        int pOld = black.get(i-1).getPercent();
+        stroke(c, 150);
+        strokeWeight(5);
+        line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
+        noStroke();
+      }
     }
     for (int i = 0; i < gray.size(); i++) {
-      gray.get(i).showChannelDot(i, gray.get(i).getPercent());
+      int p = gray.get(i).getPercent();
+      color c = gray.get(i).getColor();
+      
+      gray.get(i).showChannelDot(i*xCoef + xBuff, yBuff - p*3);
+      
+      if (i != 0) {
+        int pOld = gray.get(i-1).getPercent();
+        stroke(c, 150);
+        strokeWeight(5);
+        line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
+        noStroke();
+      }
     }
     for (int i = 0; i < red.size(); i++) {
-      red.get(i).showChannelDot(i, red.get(i).getPercent());
+      int p = red.get(i).getPercent();
+      color c = red.get(i).getColor();
+      
+      red.get(i).showChannelDot(i*xCoef + xBuff, yBuff - p*3);
+      
+      if (i != 0) {
+        int pOld = red.get(i-1).getPercent();
+        stroke(c, 150);
+        strokeWeight(5);
+        line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
+        noStroke();
+      }
     }
     for (int i = 0; i < orange.size(); i++) {
-      orange.get(i).showChannelDot(i, orange.get(i).getPercent());
+      int p = orange.get(i).getPercent();
+      color c = orange.get(i).getColor();
+      
+      orange.get(i).showChannelDot(i*xCoef + xBuff, yBuff - p*3);
+      
+      if (i != 0) {
+        int pOld = orange.get(i-1).getPercent();
+        stroke(c, 150);
+        strokeWeight(5);
+        line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
+        noStroke();
+      }
     }
     for (int i = 0; i < yellow.size(); i++) {
-      yellow.get(i).showChannelDot(i, yellow.get(i).getPercent());
+      int p = yellow.get(i).getPercent();
+      color c = yellow.get(i).getColor();
+      
+      yellow.get(i).showChannelDot(i*xCoef + xBuff, yBuff - p*3);
+      
+      if (i != 0) {
+        int pOld = yellow.get(i-1).getPercent();
+        stroke(c, 150);
+        strokeWeight(5);
+        line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
+        noStroke();
+      }
     }
     for (int i = 0; i < limeGreen.size(); i++) {
-      limeGreen.get(i).showChannelDot(i, limeGreen.get(i).getPercent());
+      int p = limeGreen.get(i).getPercent();
+      color c = limeGreen.get(i).getColor();
+      
+      limeGreen.get(i).showChannelDot(i*xCoef + xBuff, yBuff - p*3);
+      
+      if (i != 0) {
+        int pOld = limeGreen.get(i-1).getPercent();
+        stroke(c, 150);
+        strokeWeight(5);
+        line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
+        noStroke();
+      }
     }
     for (int i = 0; i < blueGreen.size(); i++) {
-      blueGreen.get(i).showChannelDot(i, blueGreen.get(i).getPercent());
+      int p = blueGreen.get(i).getPercent();
+      color c = blueGreen.get(i).getColor();
+      
+      blueGreen.get(i).showChannelDot(i*xCoef + xBuff, yBuff - p*3);
+      
+      if (i != 0) {
+        int pOld = blueGreen.get(i-1).getPercent();
+        stroke(c, 150);
+        strokeWeight(5);
+        line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
+        noStroke();
+      }
     }
     for (int i = 0; i < lightBlue.size(); i++) {
-      lightBlue.get(i).showChannelDot(i, lightBlue.get(i).getPercent());
+      int p = lightBlue.get(i).getPercent();
+      color c = lightBlue.get(i).getColor();
+      
+      lightBlue.get(i).showChannelDot(i*xCoef + xBuff, yBuff - p*3);
+      
+      if (i != 0) {
+        int pOld = lightBlue.get(i-1).getPercent();
+        stroke(c, 150);
+        strokeWeight(5);
+        line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
+        noStroke();
+      }
     }
     for (int i = 0; i < blue.size(); i++) {
-      blue.get(i).showChannelDot(i, blue.get(i).getPercent());
+      int p = blue.get(i).getPercent();
+      color c = blue.get(i).getColor();
+      
+      blue.get(i).showChannelDot(i*xCoef + xBuff, yBuff - p*3);
+      
+      if (i != 0) {
+        int pOld = blue.get(i-1).getPercent();
+        stroke(c, 150);
+        strokeWeight(5);
+        line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
+        noStroke();
+      }
     }
     for (int i = 0; i < purple.size(); i++) {
-      purple.get(i).showChannelDot(i, purple.get(i).getPercent());
+      int p = purple.get(i).getPercent();
+      color c = purple.get(i).getColor();
+      
+      purple.get(i).showChannelDot(i*xCoef + xBuff, yBuff - p*3);
+      
+      if (i != 0) {
+        int pOld = purple.get(i-1).getPercent();
+        stroke(c, 150);
+        strokeWeight(5);
+        line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
+        noStroke();
+      }
     }
     for (int i = 0; i < pink.size(); i++) {
-      pink.get(i).showChannelDot(i, pink.get(i).getPercent());
+      int p = pink.get(i).getPercent();
+      color c = pink.get(i).getColor();
+      
+      pink.get(i).showChannelDot(i*xCoef + xBuff, yBuff - p*3);
+      
+      if (i != 0) {
+        int pOld = pink.get(i-1).getPercent();
+        stroke(c, 150);
+        strokeWeight(5);
+        line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
+        noStroke();
+      }
     }
   }
 }

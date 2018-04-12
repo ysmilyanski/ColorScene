@@ -1,4 +1,5 @@
 import processing.video.*;
+import processing.pdf.*;
 
 /**
  Yuliya Smilyanski
@@ -18,14 +19,15 @@ int skipEveryBlankFrames;                 // how many frames to skip between eac
 
 boolean readMode;                         // mode for reading the movie colors
 boolean graphMode;                        // mode for graphing the movie colors
+boolean record;
 
 void setup() {
   size(960, 540);
-  myMovie = new Movie(this, "at_short.mp4");      // choose the movie
+  myMovie = new Movie(this, "tgbh.mp4");      // choose the movie
   myMovie.frameRate(30);
   myMovie.play();
   
-  numPickedFrames = 25;
+  numPickedFrames = 20;
   pickedFrames = new ArrayList<ColorSampler>();
   deltaColors = new ColorHistograph(numPickedFrames);
 
@@ -34,12 +36,17 @@ void setup() {
 
   readMode = true;
   graphMode = false;
+  record = false;
 
   myMovie.jump(0);
   myMovie.pause();
 }
 
 void draw() {
+  if (record) {
+    beginRecord(PDF, "graph-####.pdf");
+  }
+  
   if (readMode) {
     if (myMovie.available()) {
       myMovie.read();
@@ -61,9 +68,14 @@ void draw() {
   
   else if (graphMode) {
     myMovie.stop();
-    fill(255);
+    fill(30);
     rect(0, 0, width, height);
-    deltaColors.showHistograph();
+    deltaColors.showHistograph(numPickedFrames);
+  }
+  
+  if (record) {
+    endRecord();
+    record = false;
   }
 }
 
@@ -75,7 +87,10 @@ void keyPressed() {
         readMode = false;
       }
     }
-  } 
+  }
+  if (key == 'p') {
+    record = true;
+  }
   setFrame(newFrame);
 }
 
