@@ -25,12 +25,12 @@ boolean showFrameMode;
 
 void setup() {
   size(960, 540);
-  movieTitle = "at.mp4";
+  movieTitle = "moonlight.mp4";
   myMovie = new Movie(this, movieTitle);      // choose the movie
-  myMovie.frameRate(30);
+  myMovie.frameRate(5);
   myMovie.play();
   
-  numPickedFrames = 20;
+  numPickedFrames = 40;
   pickedFrames = new ArrayList<ColorSampler>();
   deltaColors = new ColorHistograph(movieTitle);
 
@@ -44,6 +44,8 @@ void setup() {
 
   myMovie.jump(0);
   myMovie.pause();
+  
+  println("numFrames: " + numFrames);
 }
 
 void draw() {
@@ -60,8 +62,10 @@ void draw() {
       setFrame(framesPassed);
       image(myMovie, 0, 0, width, height);
       readMovie();
+      println("grabbed frame " + framesPassed);
     }
     else if (framesPassed > numFrames) {
+      popHistograph();
       readMode = false;
       graphMode = true;
     }
@@ -121,7 +125,6 @@ void keyPressed() {
     graphMode = true;
   }
   
-  println(newFrame);
   setFrame(newFrame);
 }
 
@@ -130,7 +133,12 @@ void readMovie() {
   ColorSampler cs = new ColorSampler();
   cs.run();
   pickedFrames.add(cs);
-  deltaColors.populateColorData(cs);
+}
+
+void popHistograph() {
+  for (int i = 0; i < pickedFrames.size(); i++) {
+    deltaColors.populateColorData(pickedFrames.get(i));
+  }
 }
 
 // returns the frame that the movie is at 
