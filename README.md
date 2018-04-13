@@ -7,3 +7,22 @@ color scene was created in processing, using the processing video library. the p
 
 ## context
 this project was created at Northeastern University for the course ARTG2260 Programming Basics
+
+## results examples
+### aladdin over 40 frames
+![aladdin results](/ColorSceneMain/images/aladdin.mp4_colorHistograph.pdf)
+
+### jaws over 40 frames
+![jaws results](/ColorSceneMain/images/jaws.mp4_colorHistograph.pdf)
+
+### mean girls over 40 frames
+![mean girls results](/ColorSceneMain/images/meanGirls.mp4_colorHistograph.pdf)
+
+### star wars: empire strikes back over 40 frames
+![star wars ESB results](/ColorSceneMain/images/aladdin.mp4_colorHistograph.pdf)
+
+### the lion king over 40 frames
+![the lion king results](/ColorSceneMain/images/tlk.mp4_colorHistograph.pdf)
+
+### toy story over 40 frames
+![toy story results](/ColorSceneMain/images/toyStory.mp4_colorHistograph.pdf)
