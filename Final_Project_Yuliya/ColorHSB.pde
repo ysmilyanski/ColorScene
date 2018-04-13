@@ -15,8 +15,19 @@ class ColorHSB implements IColor {
     String c = "";
     
     h = floor(h);
+    s = floor(s);
+    b = floor(b);
     
-    if ((h >= 0 && h <= 20) || (h >= 340 && h <= 360)) {
+    if (s == 0 && b >= 90 && b <= 100) {
+      c = "white";
+    }
+    else if (s == 0 && b <= 10 && b >= 0) {
+      c = "black";
+    }
+    else if (s == 0 && b > 10 && b < 90) {
+      c = "gray";
+    }
+    else if ((h >= 0 && h <= 20) || (h >= 340 && h <= 360)) {
       c = "red";
     }
     else if (h >= 21 && h <= 40) {
