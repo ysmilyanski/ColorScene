@@ -1,3 +1,5 @@
+import processing.pdf.*;
+
 class ColorHistograph {
   ArrayList<ColorChannel> white;
   ArrayList<ColorChannel> black;
@@ -30,8 +32,8 @@ class ColorHistograph {
     purple = new ArrayList<ColorChannel>();
     pink = new ArrayList<ColorChannel>();
     
-    font = loadFont("AmericanTypewriter-Semibold-48.vlw");
-    font2 = loadFont("Avenir-Book-48.vlw");
+    font = createFont("AmericanTypewriter-Semibold-48.vlw", 48);
+    font2 = createFont("Avenir-Book-48.vlw", 48);
     
     this.movieTitle = movieTitle;
   }
@@ -70,6 +72,10 @@ class ColorHistograph {
   // x axis = frames
   // y axis = percent of color
   void showHistograph(int pickedFrames, int curFrame, int skipEveryBlankFrames) {
+    int xCoef = int(720 / pickedFrames);
+    int xBuff = 120;
+    int yBuff = 420;
+    
     noStroke();
     stroke(255);
     strokeWeight(3);
@@ -98,6 +104,9 @@ class ColorHistograph {
     text("frame #", 115, 470);
     textFont(font2, 12);
     text("0", 115, 440);
+    fill(255);
+    textFont(font2, 12);
+    text(pickedFrames , (pickedFrames-1)*xCoef + xBuff, 440);
     
     textFont(font, 20);
     int x = 80;
@@ -118,10 +127,6 @@ class ColorHistograph {
     + "scroll through frames using the up & down arrow keys", 10, 530);
     
     noStroke();
-    
-    int xCoef = int(720 / pickedFrames);
-    int xBuff = 120;
-    int yBuff = 420;
     
     for (int i = 0; i < white.size(); i++) {
       int p = white.get(i).getPercent();
@@ -290,10 +295,6 @@ class ColorHistograph {
         line((i-1)*xCoef + xBuff, yBuff - pOld*3, i*xCoef + xBuff, yBuff - p*3);
         noStroke();
       }
-      
-      fill(255);
-      textFont(font2, 12);
-      text(pickedFrames , (pickedFrames-1)*xCoef + xBuff, 440);
     }
   }
 }
