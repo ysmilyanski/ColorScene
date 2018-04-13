@@ -7,10 +7,11 @@ import processing.pdf.*;
  Section 01
 **/
 
-/*********** FILE NAME GOES HERE ***************/
+/*********** FILE NAME GOES HERE *************************/
 String movieTitle = "moonlight.mp4";
 /*********** NUMBER OF PICKED FRAMES GOES HERE ***********/
 int numPickedFrames = 40;
+
 
 Movie myMovie;                            // the movie to be read  
 ArrayList<ColorSampler> pickedFrames;     // array list that has a color sampler for each frame to be read
@@ -23,23 +24,22 @@ int skipEveryBlankFrames;                 // how many frames to skip between eac
 
 boolean readMode;                         // mode for reading the movie colors
 boolean graphMode;                        // mode for graphing the movie colors
-boolean record;
-boolean showFrameMode;
-boolean startScreen;
-
-PImage sScreen;
+boolean record;                           // record mode for screen capping
+boolean showFrameMode;                    // showing frame of movie during graph mode
+boolean startScreen;                      // start screen mode
+PImage sScreen;                           // image for start screen
 
 void setup() {
   size(960, 540);
   myMovie = new Movie(this, movieTitle);      // choose the movie
-  myMovie.frameRate(5);
+  myMovie.frameRate(5);                       // frame rate works best at 5
   myMovie.play();
   
-  pickedFrames = new ArrayList<ColorSampler>();
-  deltaColors = new ColorHistograph(movieTitle);
+  pickedFrames = new ArrayList<ColorSampler>();      // array with all the color samplers for each grabbed frame
+  deltaColors = new ColorHistograph(movieTitle);     // color histograph which tracks the change in colors over the grabbed frames
 
-  numFrames = getLength() - 1;
-  skipEveryBlankFrames = numFrames / (numPickedFrames - 1);
+  numFrames = getLength() - 1;            // gets the total number of frames of the movie
+  skipEveryBlankFrames = numFrames / (numPickedFrames - 1);      // calculates how many frames to skip before grabbing each frame
 
   readMode = false;
   graphMode = false;
@@ -49,8 +49,8 @@ void setup() {
   
   sScreen = loadImage("images/startScreen.png");
 
-  myMovie.jump(0);
-  myMovie.pause();
+  myMovie.jump(0);        // start the movie at 0
+  myMovie.pause();        // pause the movie so it doesn't play
   
   println("numFrames: " + numFrames);
 }
@@ -68,14 +68,14 @@ void draw() {
     if (myMovie.available()) {
       myMovie.read();
     }
-    if (framesPassed <= numFrames && framesPassed % skipEveryBlankFrames == 0) {
+    if (framesPassed <= numFrames && framesPassed % skipEveryBlankFrames == 0) {    // grab the frame if it's one of the ones to be grabbed
       background(0);
       setFrame(framesPassed);
       image(myMovie, 0, 0, width, height);
       readMovie();
       println("grabbed frame " + framesPassed);
     }
-    else if (framesPassed > numFrames) {
+    else if (framesPassed > numFrames) {      // if the movie is done, populate the color histograph and go to graph mode
       popHistograph();
       readMode = false;
       graphMode = true;
@@ -84,14 +84,14 @@ void draw() {
     framesPassed++;
   }
   
-  else if (graphMode) {
+  else if (graphMode) {        // show the graph
     myMovie.stop();
     fill(30);
     rect(0, 0, width, height);
     deltaColors.showHistograph(numPickedFrames, newFrame, skipEveryBlankFrames);
   }
   
-  else if (showFrameMode) {
+  else if (showFrameMode) {      // show the frame of the movie choosen during graph mode
     myMovie.play();
     myMovie.pause();
     setFrame(newFrame);
@@ -124,8 +124,7 @@ void keyPressed() {
     }
     else if (keyCode == UP) {
       if (graphMode) {
-        if (newFrame == 0) newFrame+=skipEveryBlankFrames;
-        else if (newFrame < getLength() - 1) newFrame+=skipEveryBlankFrames;
+        if (newFrame < getLength() - 1) newFrame+=skipEveryBlankFrames;
       }
     }
   }
@@ -151,6 +150,7 @@ void readMovie() {
   pickedFrames.add(cs);
 }
 
+// populates the color histograph for all of the picked frames
 void popHistograph() {
   for (int i = 0; i < pickedFrames.size(); i++) {
     deltaColors.populateColorData(pickedFrames.get(i));
@@ -183,4 +183,5 @@ int getLength() {
 }
 
 
-// some code is from https://github.com/processing/processing-video/blob/master/examples/Movie/Frames/Frames.pde
+// some video reading code is 
+// from https://github.com/processing/processing-video/blob/master/examples/Movie/Frames/Frames.pde

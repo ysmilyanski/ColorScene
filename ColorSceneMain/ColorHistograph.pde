@@ -1,5 +1,6 @@
 import processing.pdf.*;
 
+// holds information for every color channel for every frame of a movie
 class ColorHistograph {
   ArrayList<ColorChannel> white;
   ArrayList<ColorChannel> black;
@@ -18,6 +19,7 @@ class ColorHistograph {
   PFont font2;
   String movieTitle;
 
+  // construct an empty color histograph
   ColorHistograph(String movieTitle) {
     white = new ArrayList<ColorChannel>();
     black = new ArrayList<ColorChannel>();
@@ -38,6 +40,7 @@ class ColorHistograph {
     this.movieTitle = movieTitle;
   }
 
+  // populate color data for the color histograph from the given color sampler
   void populateColorData(ColorSampler cs) {
     for (int i = 0; i < cs.colorTypes.length; i++) {
       ColorChannel cc = cs.colorTypes[i];
@@ -69,6 +72,8 @@ class ColorHistograph {
     }
   }
 
+  // show the histograph
+  // has a lot of code to simply create the screen we see, with the graph and the words
   // x axis = frames
   // y axis = percent of color
   void showHistograph(int pickedFrames, int curFrame, int skipEveryBlankFrames) {
@@ -128,6 +133,7 @@ class ColorHistograph {
     
     noStroke();
     
+    // create the points and lines on the graph for each color
     for (int i = 0; i < white.size(); i++) {
       int p = white.get(i).getPercent();
       color c = white.get(i).getColor();

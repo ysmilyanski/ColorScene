@@ -38,6 +38,7 @@ class ColorSampler {
     }
   }
   
+  // constructs an empty color sampler to be used for a frame of a movie
   ColorSampler() {
     this.imgTopLeftX = 0;
     this.imgTopLeftY = 0;
@@ -122,6 +123,7 @@ class ColorSampler {
       }
     }
     
+    // for console testing and checking
     //for (int i = 0; i < 9; i++) {
     //  colorTypes[i].printChannel();
     //}
@@ -161,12 +163,5 @@ class ColorSampler {
       colorMode(HSB, 360, 100, 100);
       populateColorsByPixel();
     }
-  }
-  
-  // shows the image on the screen
-  void showImage() {
-    imageMode(CORNER);
-    image(this.img, imgTopLeftX, imgTopLeftY, 600, 600);
-    loadPixels();
   }
 }
