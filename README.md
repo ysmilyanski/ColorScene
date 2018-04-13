@@ -10,19 +10,19 @@ this project was created at Northeastern University for the course ARTG2260 Prog
 
 ## results examples
 ### aladdin over 40 frames
-![aladdin results](/ColorSceneMain/images/aladdin.mp4_colorHistograph)
+![aladdin results](/ColorSceneMain/images/aladdin.mp4_colorHistograph.jpg)
 
 ### jaws over 40 frames
-![jaws results](/ColorSceneMain/images/jaws.mp4_colorHistograph)
+![jaws results](/ColorSceneMain/images/jaws.mp4_colorHistograph.jpg)
 
 ### mean girls over 40 frames
-![mean girls results](/ColorSceneMain/images/meanGirls.mp4_colorHistograph)
+![mean girls results](/ColorSceneMain/images/meanGirls.mp4_colorHistograph.jpg)
 
 ### star wars: empire strikes back over 40 frames
-![star wars ESB results](/ColorSceneMain/images/aladdin.mp4_colorHistograph)
+![star wars ESB results](/ColorSceneMain/images/aladdin.mp4_colorHistograph.jpg)
 
 ### the lion king over 40 frames
-![the lion king results](/ColorSceneMain/images/tlk.mp4_colorHistograph)
+![the lion king results](/ColorSceneMain/images/tlk.mp4_colorHistograph.jpg)
 
 ### toy story over 40 frames
-![toy story results](/ColorSceneMain/images/toyStory.mp4_colorHistograph)
+![toy story results](/ColorSceneMain/images/toyStory.mp4_colorHistograph.jpg)
