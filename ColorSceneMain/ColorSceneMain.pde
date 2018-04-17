@@ -5,10 +5,11 @@ import processing.pdf.*;
  Yuliya Smilyanski
  Final Project
  Section 01
+ ColorScene: film delta color visualization tool
 **/
 
 /*********** FILE NAME GOES HERE *************************/
-String movieTitle = "moonlight.mp4";
+String movieTitle = "at.mp4";
 /*********** NUMBER OF PICKED FRAMES GOES HERE ***********/
 int numPickedFrames = 40;
 
@@ -184,4 +185,4 @@ int getLength() {
 
 
 // some video reading code is 
-// from https://github.com/processing/processing-video/blob/master/examples/Movie/Frames/Frames.pde
+// inspired by https://github.com/processing/processing-video/blob/master/examples/Movie/Frames/Frames.pde
